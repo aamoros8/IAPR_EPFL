@@ -1,10 +1,6 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
-from skimage import color, data, restoration
-from scipy.signal import convolve2d
 
 
 def contour_finder(img):
@@ -60,7 +56,11 @@ def find_players(contours,img,game,pic):
     idx_x_min=np.argmin(centers[:,0])
     idx_x_max=np.argmax(centers[:,0])
 
-
+    cards[idx_y_max].player='Player 1'
+    cards[idx_x_max].player='Player 2'
+    cards[idx_y_min].player='Player 3'
+    cards[idx_x_min].player='Player 4'
+    cards[-1].player='Dealer'
     #print('Player 1 has index', idx_y_max)
     #print('Player 2 has index', idx_x_max)
     #print('Player 3 has index', idx_y_min)
@@ -87,6 +87,8 @@ def find_players(contours,img,game,pic):
     plt.imshow(image)
     plt.title('Game{0} Pic {1}'.format(game,pic))
     plt.show()
+
+    return cards
 
 
 def normalize(arr):
@@ -120,7 +122,12 @@ class card:
         self.y=y
         self.w=w
         self.h=h
-
+        self.player=None
+    
     def center(self)-> np.array:
         center=np.array([self.x + self.w/2,self.y + self.h/2])
         return center
+
+    def set_player(self,player:str):
+        self.player=player
+    
