@@ -10,8 +10,8 @@ def contour_finder(img):
     ksize=3
     ##sigma=0.3*((ksize-1)*0.5 - 1) + 0.8
     #filter=wiener_filter(img_gray,kernel=cv2.getGaussianKernel(ksize,sigma),K=10)
-    #filter = cv2.medianBlur(img_gray,5)
-    filter= cv2.bilateralFilter(img_gray,9,75,75)
+    filter = cv2.medianBlur(img_gray,5)
+    #filter= cv2.bilateralFilter(img_gray,9,75,75)
     #plt.imshow(filter,cmap='gray')
     #plt.show()
     edges= cv2.Canny(filter,100,200)
@@ -57,10 +57,15 @@ def find_players(contours,img,game,pic):
     idx_x_max=np.argmax(centers[:,0])
 
     cards[idx_y_max].player='Player 1'
+    cards[idx_y_max].contour=contours[idx_y_max]
     cards[idx_x_max].player='Player 2'
+    cards[idx_x_max].contour=contours[idx_x_max]
     cards[idx_y_min].player='Player 3'
+    cards[idx_y_min].contour=contours[idx_y_min]
     cards[idx_x_min].player='Player 4'
+    cards[idx_x_min].contour=contours[idx_x_min]
     cards[-1].player='Dealer'
+    cards[-1].contour=contours[5]
     #print('Player 1 has index', idx_y_max)
     #print('Player 2 has index', idx_x_max)
     #print('Player 3 has index', idx_y_min)
@@ -123,6 +128,7 @@ class card:
         self.w=w
         self.h=h
         self.player=None
+        self.contour=None
     
     def center(self)-> np.array:
         center=np.array([self.x + self.w/2,self.y + self.h/2])
@@ -130,4 +136,5 @@ class card:
 
     def set_player(self,player:str):
         self.player=player
+        
     
