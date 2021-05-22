@@ -1,9 +1,9 @@
 
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
-def find_players(contours,img):
+
+def find_players(contours: list, img: np.ndarray) -> list:
 
     """
 
@@ -49,7 +49,7 @@ class card:
 
     """
 
-    def __init__(self,x,y,w,h,cnt):
+    def __init__(self, x, y, w, h, cnt):
         self.x=x
         self.y=y
         self.w=w
@@ -58,24 +58,10 @@ class card:
         self.contour=cnt
     
     def center(self)-> np.array:
-        """
 
-    Arguments:
-
-    Returns: 
-
-    """
-
-        center=np.array([self.x + self.w/2,self.y + self.h/2])
+        center=np.array([self.x + self.w / 2, self.y + self.h / 2])
         return center
 
-    def set_player(self,player:str):
-        """
-
-    Arguments:
-
-    Returns: 
-
-    """
-        self.player=player
+    def set_player(self, player: str):
+        self.player = player
   
