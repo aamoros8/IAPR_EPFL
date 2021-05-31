@@ -4,7 +4,7 @@ from typing import Tuple
 
 
 def contour_finder(image: np.ndarray,
-                   preprocessed: np.ndarray) -> Tuple(list, np.ndarray, bool):
+                   preprocessed: np.ndarray):
     """
     Finds the 5 longest contours of the image which
     are the cards of the players as well as the dealer patch

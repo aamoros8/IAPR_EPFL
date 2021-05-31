@@ -1,10 +1,10 @@
 
 import cv2
 import numpy as np
-from typing import tuple
 
 
-def preprocessing(img: np.ndarray) -> tuple(np.ndarray, np.ndarray):
+
+def preprocessing(img: np.ndarray):
     """
 
     Arguments:
